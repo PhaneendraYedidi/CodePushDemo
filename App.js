@@ -120,7 +120,11 @@ class App extends Component {
             value={this.state.deploymentKey}
             placeholder="Enter Deployment Key"
           />
-          <Text style={{fontWeight: 'bold', padding: 30}}>Customer 1</Text>
+          <Text style={{fontWeight: 'bold', padding: 30}}>Mobile App - Main branch</Text>
+          {/* <Image
+            style={styles.tinyLogo}
+            source={require('./images/twitter.png')}
+          /> */}
 
 					<TouchableOpacity onPress={this.restartApp.bind(this)}>
 						<Text style={styles.syncButton}>Press to restart</Text>
@@ -181,6 +185,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  tinyLogo: {
+    width: 50,
+    height: 50,
+    marginTop: 20,
+    marginBottom: 20
+  }
 });
 
 /**
