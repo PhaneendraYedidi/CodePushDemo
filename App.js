@@ -9,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
 } from 'react-native';
 
 import CodePush from "react-native-code-push";
@@ -16,7 +17,7 @@ import CodePush from "react-native-code-push";
 class App extends Component {
   constructor() {
     super();
-    this.state = { restartAllowed: true };
+    this.state = { restartAllowed: true, deploymentKey: 'CAbDGF5FOJwimuANPwCjRrPqQzChplbaK5etK'};
   }
 
   codePushStatusDidChange(syncStatus) {
@@ -72,7 +73,7 @@ class App extends Component {
   /** Update is downloaded silently, and applied on restart (recommended) */
   sync() {
     CodePush.sync(
-      {},
+      { deploymentKey: this.state.deploymentKey },
       this.codePushStatusDidChange.bind(this),
       this.codePushDownloadDidProgress.bind(this)
     );
@@ -81,7 +82,7 @@ class App extends Component {
   /** Update pops a confirmation dialog, and then immediately reboots the app */
   syncImmediate() {
     CodePush.sync(
-      { installMode: CodePush.InstallMode.IMMEDIATE, updateDialog: true },
+      { deploymentKey: this.state.deploymentKey,installMode: CodePush.InstallMode.IMMEDIATE, updateDialog: true },
       this.codePushStatusDidChange.bind(this),
       this.codePushDownloadDidProgress.bind(this)
     );
@@ -89,6 +90,10 @@ class App extends Component {
   
   restartApp() {
 	  CodePush.restartApp();
+  }
+
+  onChangeTextInput = (text) => {
+    this.setState({deploymentKey: text})
   }
 
   render() {
@@ -107,7 +112,16 @@ class App extends Component {
 					<Text style={styles.welcome}>
 					  Welcome to CodePush Demo!
 					</Text>
-          <Text>Updating MainBundle using code push</Text>
+          <Text>Updating MainBundle.JS using code push</Text>
+          <Text style={{fontWeight: 'bold', paddingTop: 20}}>Deployment Key</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={this.onChangeTextInput}
+            value={this.state.deploymentKey}
+            placeholder="Enter Deployment Key"
+          />
+          <Text style={{fontWeight: 'bold', padding: 30}}>Customer 1</Text>
+
 					<TouchableOpacity onPress={this.restartApp.bind(this)}>
 						<Text style={styles.syncButton}>Press to restart</Text>
 					</TouchableOpacity>
@@ -160,6 +174,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     margin: 20
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
 
