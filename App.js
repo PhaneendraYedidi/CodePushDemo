@@ -120,11 +120,11 @@ class App extends Component {
             value={this.state.deploymentKey}
             placeholder="Enter Deployment Key"
           />
-          <Text style={{fontWeight: 'bold', padding: 30}}>Mobile App - Main branch</Text>
-          {/* <Image
+          <Text style={{fontWeight: 'bold', padding: 30}}>Mobile App - Customer 2</Text>
+          <Image
             style={styles.tinyLogo}
-            source={require('./images/twitter.png')}
-          /> */}
+            source={require('./images/facebook.png')}
+          />
 
 					<TouchableOpacity onPress={this.restartApp.bind(this)}>
 						<Text style={styles.syncButton}>Press to restart</Text>
